@@ -1,17 +1,19 @@
-import { SlidingWindow } from "./circular-buffer.js";
-const buffer = new SlidingWindow(0, 1, 2, 3, 4, 5)
-    .setSpread(4);
-buffer.incrementTail(3);
-console.log(buffer.getWindow());
-// buffer.incrementSpread(0);
-// output: [0]
-// buffer.incrementSpread(1);
-// output: [0, 1]
-// buffer.incrementSpread(2);
-// output: [0, 1, 2]
-// buffer.decrementSpread(3);
-// output: [1, 2, 0]
-// buffer.incrementTail(4);
-// output: [2, 0, 1]
-// buffer.incrementTail(5);
-// output: [0, 1, 2]
+import { SlidingWindowSubCircularBuffer } from "./sliding-window-sub-circular-buffer.js";
+const buffer = new SlidingWindowSubCircularBuffer(0, 1, 2, 3, 4, 5);
+buffer.windowSpread = 3;
+console.log(buffer.window, buffer.currentElement);
+buffer.incrementCurrentElement(2);
+console.log(buffer.window, buffer.currentElement);
+buffer.incrementCurrentElement();
+console.log(buffer.window, buffer.currentElement);
+buffer.windowSpread = 4;
+console.log(buffer.window, buffer.currentElement);
+buffer.nextWindow();
+console.log(buffer.window, buffer.currentElement);
+buffer.windowSpread = 2;
+console.log(buffer.window, buffer.currentElement);
+buffer.incrementCurrentElement();
+console.log(buffer.window, buffer.currentElement);
+buffer.nextWindow();
+buffer.windowSpread = 3;
+console.log(buffer.window, buffer.currentElement);
